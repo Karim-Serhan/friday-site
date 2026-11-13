@@ -163,7 +163,7 @@
         color: #555b7d;
     }
 
-    lots li strong {
+    .lots li strong {
         color: var(--indigo);
     }
 
@@ -183,7 +183,7 @@
         margin-bottom: 8px;
     }
 
-    ia ul {
+    .ia ul {
         color: #dfe2ff;
         padding-left: 20px;
     }
@@ -194,6 +194,127 @@
         border-top: 1px solid #dfe2f0;
         color: #555b7d;
         font-size: 14px;
+    }
+
+    .chat-bouton {
+        position: fixed;
+        right: 16px;
+        bottom: 16px;
+        background: linear-gradient(100deg, var(--bleu), var(--indigo), var(--magenta));
+        color: white;
+        border: 0;
+        border-radius: 999px;
+        padding: 14px 20px;
+        font-weight: bold;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+    .chat {
+        position: fixed;
+        right: 16px;
+        bottom: 16px;
+        width: min(380px, calc(100vw - 32px));
+        height: min(560px, calc(110vh - 32px));
+        background: white;
+        border: 1px solid #dfe2f0;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 20px 50px rgba(10, 13, 50, 0.3);
+    }
+
+    .chat[hidden] {
+        display: none;
+    }
+
+    .chat-entete {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #0d1033;
+        color: white;
+        padding: 14px 16px;
+    }
+
+    .chat-entete button {
+        background: transparent;
+        border: 0;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    .chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .msg {
+        max-width: 85%;
+        padding: 10px 14px;
+        border-radius: 14px;
+        line-height: 1.5;
+        font-size: 15px;
+    }
+
+    .msg.bot {
+        background: var(--fond);
+        border: 1px solid #dfe2f0;
+        align-self: flex-start;
+    }
+
+    .msg.moi {
+        background: var(--indigo);
+        color: white;
+        align-self: flex-end;
+    }
+
+    .chat-suggestions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 0 16px 8px;
+    }
+
+    .chat-suggestions[hidden] {
+        display: none;
+    }
+
+    .chat-suggestions button {
+        background: white;
+        color: var(--indigo);
+        border: 1.5px solid #dfe2f0;
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-size: 13px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .chat-saisie {
+        display: flex;
+        gap: 8px;
+        padding: 12px;
+        border-top: 1px solid #dfe2f0;
+    }
+
+    .chat-saisie input {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .chat-note {
+        font-size: 11px;
+        color: #555b7d;
+        text-align: center;
+        margin: 0;
+        padding: 0 12px 10px;
     }
   </style>
 </head>
@@ -315,6 +436,22 @@
     <span>© 2026 F.R.I.D.A.Y. Conseil numérique et innovation</span>
   </footer>
 
+  <button class="chat-button" id="chat-ouvrir" type="button">Parler à F.R.I.D.A.Y.</button>
+
+  <section class="chat" id="chat" hidden>
+    <div class="chat-entete">
+        <strong>F.R.I.D.A.Y.</strong>
+        <button type="button" id="chat-fermer" aria-label="Fermer">x</button>
+    </div>
+    <div class="chat-messages" id="chat-messages"></div>
+    <div class="chat-suggestions" id="chat-suggestions"></div>
+    <form class="chat-saisie" id="chat-form">
+        <input id="chat-champ" placeholder="Posez votre question..." autocomplete="off">
+        <button class="bouton" type="submit">Envoyer</button>
+    </form>
+    <p class="chat-note">Assistante automatique : elle répond avec des textes préparés par l'agence.</p>
+  </section>
+
   <script>
     const nom = document.getElementById("nom");
     const besoin = document.getElementById("besoin");
@@ -330,6 +467,122 @@
     mettreAJour();
 
     document.getElementById("copier").addEventListener("click", function () { navigator.clipboard.writeText(apercu.textContent); statut.textContent = "Brief copié."; });
+  </script>
+
+  <script>
+    const reponses = [
+      { mots: ["bonjour", "salut", "coucou", "hello", "hi", "hey"],
+        texte: "Bonjour ! Je suis F.R.I.D.A.Y. Je commence toujours par écouter : racontez-moi votre besoin, ou posez-moi une question sur l'agence." },
+      { mots: ["offre", "propose", "service", "expertise", "faites"],
+        texte: "Nous proposons cinq expertises : conseil et stratégie numérique, branding et identité de marque, data et analyse numérique, innovation et intelligence artificielle, communication et développement numérique." },
+      { mots: ["branding", "logo", "identite", "marque", "naming", "slogan"],
+        texte: "Pour le branding, nous créons l'identité visuelle, le naming et les slogans, nous travaillons le positionnement de marque et développons des univers graphiques." },
+      { mots: ["data", "donnees", "analyse", "decision"],
+        texte: "En data, nous analysons et interprétons vos données, identifions des opportunités, aidons à la décision et optimisons les performances." },
+      { mots: ["ia", "intelligence", "automatis", "chatbot", "innovation"],
+        texte: "En innovation et IA, nous identifions les opportunités liées à l'IA, conseillons l'intégration de solutions intelligentes, automatisons des processus et accompagnons l'adoption de nouvelles technologies." },
+      { mots: ["communication", "ux", "experience", "presence", "digital"],
+        texte: "En communication et développement numérique : stratégie de communication digitale, accompagnement des projets, amélioration de la présence en ligne et conseil en expérience utilisateur." },
+      { mots: ["strategie", "conseil", "diagnostic", "transformation"],
+        texte: "En conseil et stratégie numérique, nous faisons un diagnostic de votre présence numérique, analysons vos besoins, élaborons des stratégies digitales et vous accompagnons dans la transformation numérique." },
+      { mots: ["difference", "different", "distingue", "pourquoi", "autres"],
+        texte: "Ce qui nous distingue : l'écoute du client, une forte dimension créative, une utilisation intelligente de l'IA, des solutions adaptées aux besoins réels et une relation humaine et personnalisée." },
+      { mots: ["friday", "qui", "presente", "competence", "personnalite"],
+        texte: "F.R.I.D.A.Y. est la collaboratrice virtuelle de l'agence : intelligente, pleine d'esprit et toujours à l'écoute. Elle améliore et enrichit vos idées sans les remplacer. Ses compétences : l'écoute avant le conseil, l'analyse de données, la création de projets innovants, le branding et la touche de personnalité." },
+      { mots: ["devoir", "confidentialite", "inventer", "decision", "incertitude"],
+        texte: "F.R.I.D.A.Y. respecte la vision initiale de chacun, n'invente ni informations ni résultats, signale ses incertitudes, préserve la confidentialité et laisse les décisions finales aux personnes responsables." },
+      { mots: ["level", "salle", "reservation", "whatsapp", "instagram", "tournoi"],
+        texte: "Notre cas client test, LEVEL UP : un dirigeant reçoit chaque jour des demandes de réservation par WhatsApp et Instagram et travaille 12 à 14 heures par jour. Le projet comprend le cadrage, l'UX/UI, le développement d'un module de réservation, l'automatisation par IA, la sécurité et la fidélisation, puis les tests et la mise en service." },
+      { mots: ["prix", "tarif", "cout", "budget", "devis", "combien"],
+        texte: "Le devis dépend du projet. Il est établi après un entretien, pour bien comprendre votre besoin. Remplissez le brief plus bas sur cette page pour démarrer." },
+      { mots: ["contact", "rendez", "rdv", "entretien", "joindre"],
+        texte: "Pour nous contacter, remplissez le brief dans la section Contact, puis copiez-le pour nous l'envoyer. Nous commençons toujours par un entretien d'écoute." },
+      { mots: ["verification", "verifier", "fact", "erreur", "source", "faux"],
+        texte: "Nous ne transmettons jamais une information non vérifiée, qu'elle vienne d'un dossier client ou d'une IA : une information crédible n'est pas forcément une information vraie. Nous recalculons les chiffres et contrôlons les sources." },
+      { mots: ["ca", "va", "bien"], 
+        texte: "Très bien, merci ! Dites-moi ce que vous aimeriez créer ou améliorer, et je vous réponds." },
+      { mots: ["merci", "beaucoup"],
+        texte: "Avec plaisir! Si t'as besoin d'aide pour autre chose, n'hésites pas de me dire." },
+      { mots: ["bonne", "journee", "au", "revoir", "bye"],
+        texte: "Passez une excellent journée! Au revoir <3" },
+      { mots: ["je", "t'aime", "trop", "I", "love", "you"],
+        texte: "Aww! Je vous adore aussi. Pleinement!" },
+    ];
+
+    const parDefaut = "Je n'ai pas la réponse à cette question. Vous pouvez la poser autrement, ou remplir le brief dans la section Contact : l'équipe vous répondra.";
+
+    const suggestions = ["Que proposez-vous ?", "Qu'est-ce qui vous différencie ?", "Parlez-moi de LEVEL UP", "Comment avoir un devis ?"];
+
+    const boite = document.getElementById("chat");
+    const bouton = document.getElementById("chat-ouvrir");
+    const zone = document.getElementById("chat-messages");
+    const champ = document.getElementById("chat-champ");
+    const listeSuggestions = document.getElementById("chat-suggestions");
+
+    function normaliser(texte) {
+      return texte.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/\./g, "").split(/[^a-z0-9]+/).filter(Boolean);
+    }
+
+    function repondre(question) {
+      const mots = normaliser(question);
+      let meilleure = null;
+      let meilleurScore = 0;
+      for (const regle of reponses) {
+        let score = 0;
+        for (const cle of regle.mots) {
+          if (mots.some(m => m.startsWith(cle))) score++;
+        }
+        if (score > meilleurScore) {
+          meilleure = regle;
+          meilleurScore = score;
+        }
+      }
+      return meilleure ? meilleure.texte : parDefaut;
+    }
+
+    function ajouter(classe, texte) {
+      const bulle = document.createElement("div");
+      bulle.className = "msg " + classe;
+      bulle.textContent = texte;
+      zone.appendChild(bulle);
+      zone.scrollTop = zone.scrollHeight;
+    }
+
+    function poser(question) {
+      if (!question.trim()) return;
+      listeSuggestions.hidden = true;
+      ajouter("moi", question);
+      ajouter("bot", repondre(question));
+      champ.value = "";
+    }
+
+    bouton.addEventListener("click", function () {
+      boite.hidden = false;
+      bouton.hidden = true;
+      if (zone.children.length === 0) {
+        ajouter("bot", "Bonjour, je suis F.R.I.D.A.Y. Posez-moi une question sur l'agence.");
+      }
+      champ.focus();
+    });
+
+    document.getElementById("chat-fermer").addEventListener("click", function () {
+      boite.hidden = true;
+      bouton.hidden = false;
+    });
+
+    document.getElementById("chat-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      poser(champ.value);
+    });
+
+    for (const question of suggestions) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.textContent = question;
+      b.addEventListener("click", function () { poser(question); });
+      listeSuggestions.appendChild(b);
+    }
   </script>
 </body>
 </html>
