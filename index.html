@@ -316,6 +316,43 @@
         margin: 0;
         padding: 0 12px 10px;
     }
+
+    .coordonnees {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 24px;
+        display: grid;
+        gap: 10px;
+    }
+
+    .coordonnees li {
+        display: flex;
+        gap: 12px;
+        align-items: baseline;
+        padding: 14px 18px;
+        background: white;
+        border: 1px solid #dfe2f0;
+        border-radius: 14px;
+    }
+
+    .coordonnees span {
+        min-width: 90px;
+        font-size: 13px;
+        font-weight: bold;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #555b7d
+    }
+
+    .coordonnees a {
+        color: var(--indigo);
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .coordonnees a:hover {
+        color: var(--magenta);
+    }
   </style>
 </head>
 <body>
@@ -411,6 +448,16 @@
 
   <h2 id="contact">Contact</h2>
   <p>Racontez-nous votre idée : F.R.I.D.A.Y. commence toujours par écouter.</p>
+  <ul class="coordonnees">
+    <li>
+        <span>E-mail</span>
+        <a href="mailto:karimghserhan17072007@gmail.com">karimghserhan17072007@gmail.com</a>
+    </li>
+    <li>
+        <span>Téléphone</span>
+        <a href="tel:+33759443691">+33759443691</a>
+    </li>
+  </ul>
   <form id="formulaire">
     <label for="nom">Votre nom ou votre structure</label>
     <input id="nom" placeholder="Ex. LEVEL UP">
@@ -507,6 +554,8 @@
         texte: "Passez une excellent journée! Au revoir <3" },
       { mots: ["je", "t'aime", "trop", "I", "love", "you"],
         texte: "Aww! Je vous adore aussi. Pleinement!" },
+      { mots: ["contact", "rendez", "rdv", "entretien", "joindre", "telephone", "mail", "email", "numero", "appeler"],
+        texte: "Vous pouvez nous écrire à karimghserhan17072007@gmail.com ou nous appeler au +33759443691. Vous pouvez également remplir le brief dans la section Contact. Nous commençons toujours par un entretien d'écoute."},
     ];
 
     const parDefaut = "Je n'ai pas la réponse à cette question. Vous pouvez la poser autrement, ou remplir le brief dans la section Contact : l'équipe vous répondra.";
