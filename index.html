@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>F.R.I.D.A.Y.</title>
+  <style>
+    :root {
+        --bleu: #0a8cf0;
+        --indigo: #2a3fc4;
+        --magenta: #e0189a;
+        --texte: #101433;
+        --fond: #f6f7fc;
+    }
+
+    body {
+        background: var(--fond);
+        color: var(--texte);
+        font-family: Arial, sans-serif;
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 24px;
+        line-height: 1.6;
+    }
+
+    h1 {
+        color: var(--indigo);
+        font-size: 48px;
+    }
+
+    h2 {
+        color: var(--magenta);
+    }
+
+    .cartes {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+    }
+
+    .carte {
+        background: white;
+        border: 1px solid #dfe2f0;
+        border-radius: 16px;
+        padding: 20px;
+    }
+
+    .carte h3 {
+        margin-top: 0;
+        color: var(--indigo);
+    }
+    .menu {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 24px;
+    }
+
+    .menu a {
+        color: var(--indigo);
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .menu a:hover {
+        color: var(--magenta);
+    }
+
+    .points {
+        padding-left: 20px;
+    }
+
+    .points li {
+        margin-bottom: 10px;
+    }
+
+    .bouton {
+        display: inline-block;
+        background: linear-gradient(100deg, var(--bleu), var(--indigo), var(--magenta));
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 12px 24px;
+        border-radius: 999px;
+    }
+
+    .logo {
+        width: 48px;
+        height: 48px;
+        border-radius: auto;
+        margin-right: auto;
+    }
+
+    .menu {
+        align-items: center;
+    }
+
+    form {
+        display: grid;
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+
+    input, select, textarea {
+        font: inherit;
+        padding: 10px;
+        border: 1.5px solid #dfe2f0;
+        border-radius: 10px;
+    }
+
+    pre {
+        background: white;
+        border: 1px solid #dfe2f0;
+        border-radius: 12px;
+        padding: 16px;
+        white-space: pre-wrap;
+    }
+
+    button.bouton {
+        border: 0;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .acronyme {
+        display: flex;
+        flex-direction: column;
+        font-size: clamp(32px, 7vw, 64px);
+        line-height: 1.05;
+        margin: 24px 0;
+    }
+
+    .acronyme b {
+        background: linear-gradient(100deg, var(--bleu), var(--indigo), var(--magenta));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .acronyme small {
+        font-size: 0.3em;
+        color: #555b7d;
+    }
+
+    .situation {
+        margin: 0 0 24px;
+        padding: 20px 24px;
+        background: white;
+        border: 1px solid #dfe2f0;
+        border-radius: 16px;
+        color: #555b7d;
+    }
+
+    .situation strong {
+        color: var(--texte);
+    }
+
+    .lots {
+        padding-left: 24px;
+    }
+
+    .lots li {
+        margin-bottom: 14px;
+        color: #555b7d;
+    }
+
+    lots li strong {
+        color: var(--indigo);
+    }
+
+    .ia {
+        background: #0d1033;
+        color: #f2f3ff;
+        border-radius: 20px;
+        padding: 28px;
+    }
+
+    .ia p {
+        color: #b9bfe8;
+    }
+
+    .ia h3 {
+        color: #7fc4ff;
+        margin-bottom: 8px;
+    }
+
+    ia ul {
+        color: #dfe2ff;
+        padding-left: 20px;
+    }
+
+    footer {
+        margin-top: 48px;
+        padding-top: 20px;
+        border-top: 1px solid #dfe2f0;
+        color: #555b7d;
+        font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+    <nav class="menu">
+        <img src="logo.jpg" alt="logo F.R.I.D.A.Y." class="logo">
+        <a href="#offres">Offres</a>
+        <a href="#difference">Différence</a>
+        <a href="#ia">L'IA</a>
+        <a href="#cas">Cas client</a>
+        <a href="#contact">Contact</a>
+    </nav>
+  <h1 class="acronyme">
+    <span><b>F</b>riendly</span>
+    <span><b>R</b>einforcement <small>(for)</small></span>
+    <span><b>I</b>ntelligent</span>
+    <span><b>D</b>ata-based</span>
+    <span><b>A</b>rchitecture <small>(and)</small></span>
+    <span><b>Y</b>outh</span>
+  </h1>
+  <p>Bring your ideas to light on one Friday night.</p>
+
+  <h2 id="offres">Nos offres</h2>
+  <section class="cartes">
+    <article class="carte">
+        <h3>Conseil et stratégie numérique</h3>
+        <p>Diagnostic, analyse des besoins, stratégie digitale.</p>
+    </article>
+    <article class="carte">
+        <h3>Branding et identité de marque</h3>
+        <p>Identité visuelle, naming, slogans, positionnement.</p>
+    </article>
+    <article class="carte">
+        <h3>Data et analyse numérique</h3>
+        <p>Analyse des données, aide à la décision, optimisation.</p>
+    </article>
+    <article class="carte">
+        <h3>Innovation et intelligence artificielle</h3>
+        <p>Opportunités IA, automatisation, nouvelles technologies.</p>
+    </article>
+    <article class="carte">
+        <h3>Communication et développement numérique</h3>
+        <p>Communication digitale, présence en ligne, expérience utilisateur.</p>
+    </article>
+  </section>
+  <h2 id="difference">Notre différence</h2>
+  <ul class="points">
+    <li><strong>L'écoute d'abord.</strong> Une approche centrée sur le client.</li>
+    <li><strong>Créativité forte.</strong> Des idées plus frappantes et originales.</li>
+    <li><strong>IA bien utilisée.</strong> Une utilisation intelligente, au service de l'humain.</li>
+    <li><strong>Sur mesure.</strong> Des solutions adaptées aux besoins réels.</li>
+    <li><strong>Relation humaine.</strong> Accessible et personnalisée.</li>
+  </ul>
+
+  <h2 id="ia">Notre collaboratrice virtuelle</h2>
+  <section class="ia">
+    <p>
+        F.R.I.D.A.Y. est intelligente, pleine d'esprit et toujours à l'écoute. Elle n'impose pas une meilleure vision que la vôtre : elle l'améliore, l'enrichit et la rend plus fluide, comme le ferait une véritable assistante, doublée d'une amie.
+    </p>
+
+    <h3>Ses compétences</h3>
+    <ul>
+        <li>L'écoute avant le conseil</li>
+        <li>L'analyse de données</li>
+        <li>La création de projets innovants</li>
+        <li>Le renouvellement et l'enrichissement des idées</li>
+        <li>Le branding et l'identité visuelle</li>
+        <li>La touche de personnalité</li>
+    </ul>
+
+    <h3>Ses devoirs</h3>
+    <ul>
+        <li>Respecter la vision initiale de chacun</li>
+        <li>Ne pas inventer d'informations ni de résultats</li>
+        <li>Signaler les incertitudes</li>
+        <li>Préserver la confidentialité</li>
+        <li>Laisser les décisions finales aux personnes responsables</li>
+    </ul>
+  </section>
+
+  <h2 id="cas">Cas client : LEVEL UP</h2>
+  <blockquote class="situation">
+    Le dirigeant arrive vers <strong>11h30</strong> et répond aux messages WhatsApp et Instragram de la veille. La salle ouvre à <strong>14h</strong> et ferme à <strong>23h</strong> en semaine, <strong>1h</strong> le week-end : de <strong>12 à 14 heures de travail par jour</strong>. Faute d'assistants, des appels et des réservations sont manqués.
+  </blockquote>
+
+  <ol class="lots">
+    <li><strong>Cadrage et gestion de projet</strong><br>Valider le besoin, piloter avec le client.</li>
+    <li><strong>UX/UI et identité visuelle</strong><br>Parcours, maquettes et mini charte graphique.</li>
+    <li><strong>Développement</strong><br>Calendrier de réservation, inscriptions aux tournois, connexion WhatsApp.</li>
+    <li><strong>Automatisation et IA</strong><br>Réponses aux questions fréquentes, messages de confirmation et vocaux.</li>
+    <li><strong>Data, sécurité et fidélisation</strong><br>Programme de fidélité et cadre RGPD.</li>
+    <li><strong>Tests et mise en service</strong><br>Essais avec de vrais messages, recette et formation de l'équipe.</li>
+  </ol>
+
+  <h2 id="contact">Contact</h2>
+  <p>Racontez-nous votre idée : F.R.I.D.A.Y. commence toujours par écouter.</p>
+  <form id="formulaire">
+    <label for="nom">Votre nom ou votre structure</label>
+    <input id="nom" placeholder="Ex. LEVEL UP">
+
+    <label for="besoin">Votre besoin</label>
+    <select id="besoin">
+        <option>Conseil et stratégie numérique</option>
+        <option>Branding et identité de marque</option>
+        <option>Data et analyse numérique</option>
+        <option>Innovation et intelligence artificielle</option>
+        <option>Communication et développement numérique</option>
+    </select>
+
+    <label for="message">Votre situation en quelques lignes</label>
+    <textarea id="message" rows="4"></textarea>
+  </form>
+
+  <pre id="apercu"></pre>
+  <button class="bouton" id="copier" type="button">Copier le brief</button>
+  <p id="statut"></p>
+
+  <footer>
+    <span>© 2026 F.R.I.D.A.Y. Conseil numérique et innovation</span>
+  </footer>
+
+  <script>
+    const nom = document.getElementById("nom");
+    const besoin = document.getElementById("besoin");
+    const message = document.getElementById("message");
+    const apercu = document.getElementById("apercu");
+    const statut = document.getElementById("statut");
+
+    function mettreAJour() {
+        apercu.textContent = "Bonjour F.R.I.D.A.Y.,\n\n" + "Structure : " + (nom.value || "(à préciser)") + "\n" + "Besoin : " + besoin.value + "\n\n" + "Situation :\n" + (message.value || "(à décrire)");
+    }
+
+    document.getElementById("formulaire").addEventListener("input", mettreAJour);
+    mettreAJour();
+
+    document.getElementById("copier").addEventListener("click", function () { navigator.clipboard.writeText(apercu.textContent); statut.textContent = "Brief copié."; });
+  </script>
+</body>
+</html>
